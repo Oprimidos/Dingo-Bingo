@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 8878689026426739917}
   - component: {fileID: 8878689026428067053}
   - component: {fileID: 8878689026429034029}
+  - component: {fileID: -7144794105039067915}
   m_Layer: 0
   m_Name: Arrow_tower
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,3 +88,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-7144794105039067915
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8878689026426831085}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.02639925, y: 0.026482005, z: 0.083409816}
+  m_Center: {x: -9.313226e-10, y: 0.00004138192, z: 0.041704908}

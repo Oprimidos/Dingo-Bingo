@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3430338962254741241}
   - component: {fileID: 3430338962253971161}
   - component: {fileID: 3430338962252971033}
+  - component: {fileID: 1170186742529486845}
   m_Layer: 0
   m_Name: barrack
-  m_TagString: Untagged
+  m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87,3 +88,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1170186742529486845
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3430338962255225561}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06602301, y: 0.0818142, z: 0.067083165}
+  m_Center: {x: -0.0037020165, y: 0.009231895, z: -0.0006999839}

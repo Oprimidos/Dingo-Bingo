@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BuildingManager : MonoBehaviour
 {
     public GameObject[] objects;
-    private GameObject pendingObject;
+    public GameObject pendingObject;
 
     public float rotateAmount = 45f;
 
