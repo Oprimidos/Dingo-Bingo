@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: -3675736009362716470}
   - component: {fileID: 3477106491297658989}
   - component: {fileID: 2869875924057841491}
+  - component: {fileID: -3545330265019329102}
   m_Layer: 8
   m_Name: Character_Swordman_Blue
   m_TagString: Untagged
@@ -190,6 +191,21 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3545330265019329102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5362410734322373781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d316e3755b5f9624ebc0e7512197a451, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ground:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &5362548748670364491
 GameObject:
   m_ObjectHideFlags: 0
