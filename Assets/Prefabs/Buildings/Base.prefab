@@ -498,6 +498,7 @@ GameObject:
   - component: {fileID: 3000573635319818179}
   - component: {fileID: 508545281545863817}
   - component: {fileID: -5950759687907938168}
+  - component: {fileID: -511398876928077324}
   m_Layer: 0
   m_Name: Base
   m_TagString: Building
@@ -598,6 +599,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-511398876928077324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6264944806276476435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daf1b3d95c24b1e4886f79e8ad6e455a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 1000
 --- !u!1 &8354348632537878822
 GameObject:
   m_ObjectHideFlags: 0

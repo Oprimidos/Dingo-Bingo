@@ -8,9 +8,18 @@ public class BuildSelection : MonoBehaviour
 {
     public GameObject selectedObject;
     public TextMeshProUGUI objNameText;
+    public TextMeshProUGUI healthText; // Reference to UI Text component for displaying health
     private BuildingManager buildingManager;
 
     public GameObject objUI;
+
+    public GameObject basePanelUI;
+    public GameObject housePanelUI;
+    public GameObject minePanelUI;
+    public GameObject barrackPanelUI;
+    public GameObject axeManPanelUI;
+    public GameObject arrowTowerPanelUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +47,7 @@ public class BuildSelection : MonoBehaviour
         }
     }
 
-    private void Select(GameObject obj) // binalarý seçmemizi saðlýyor
+    private void Select(GameObject obj)
     {
         if (obj == selectedObject)
         {
@@ -57,25 +66,32 @@ public class BuildSelection : MonoBehaviour
         {
             outline.enabled = true;
         }
-        objNameText.text = obj.name;// bina adýný direkt text mexhe atýyor
-        objUI.SetActive(true);//bina UI açýyor
+        objNameText.text = obj.name;
+        objUI.SetActive(true);
         selectedObject = obj;
 
+        // Check if the selected object has a BuildingHealth component
+        BuildingHealth buildingHealth = obj.GetComponent<BuildingHealth>();
+        if (buildingHealth != null)
+        {
+            // Display the health in the UI
+            healthText.text = "Health: " + buildingHealth.health.ToString("F0");
+        }
+        else
+        {
+            // If the selected object doesn't have BuildingHealth, hide the health text
+            healthText.text = "";
+        }
     }
 
     private void Deselect()
     {
-        objUI.SetActive(false);//bina UI gizliyor
+        objUI.SetActive(false);
         selectedObject.GetComponent<Outline>().enabled = false;
         selectedObject = null;
     }
 
-    public void Move()//binayý hareket ettirme butonu için
-    {
-        buildingManager.pendingObject = selectedObject;
-    }
-
-    public void Delete()// binayý silme butonu için
+    public void Delete()
     {
         GameObject objToDestroy = selectedObject;
         Deselect();

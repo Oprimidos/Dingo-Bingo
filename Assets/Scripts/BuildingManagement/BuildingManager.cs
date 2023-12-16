@@ -53,6 +53,12 @@ public class BuildingManager : MonoBehaviour
     public bool canPlace = true;
     [SerializeField] private Toggle gridToggle;
 
+
+
+    private int baseCount = 0;
+    private int barrackCount = 0;
+    private int axeManCount = 0;
+
     public void Start()
     {
         resourceAmount = GameObject.Find("ResourceManager").GetComponent<ResourceAmount>();
@@ -154,17 +160,69 @@ public class BuildingManager : MonoBehaviour
 
 
     public void BuildingButtonManagement() 
-    {//butonlar yeteri kadar melzeme olmayýnca yok olur, yeteri malzeme gelince tekrardan dirilir
-        if (resourceAmount.stoneNum < 60)
+    {
+        // base, barrack ve axeman binalarý bir kurulmuþ ise bir daha inþaa edilmesine izin vermemek için binanýn inþa butonunu deactive ediyoruz
+        if (baseCount > 0)
         {
             baseButtonB.gameObject.SetActive(true);
             baseButton.gameObject.SetActive(false);
         }
         else
         {
-            baseButtonB.gameObject.SetActive(false);
-            baseButton.gameObject.SetActive(true);
+            if (resourceAmount.stoneNum < 60)
+            {
+                baseButtonB.gameObject.SetActive(true);
+                baseButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                baseButtonB.gameObject.SetActive(false);
+                baseButton.gameObject.SetActive(true);
+            }
         }
+
+        if (barrackCount > 0)
+        {
+            barrackButtonB.gameObject.SetActive(true);
+            barrackButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (resourceAmount.stoneNum < 120)
+            {
+                barrackButtonB.gameObject.SetActive(true);
+                barrackButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                barrackButtonB.gameObject.SetActive(false);
+                barrackButton.gameObject.SetActive(true);
+            }
+        }
+
+        if (axeManCount > 0)
+        {
+            axeManButtonB.gameObject.SetActive(true);
+            axeManButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            if (resourceAmount.stoneNum < 160)
+            {
+                axeManButtonB.gameObject.SetActive(true);
+                axeManButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                axeManButtonB.gameObject.SetActive(false);
+                axeManButton.gameObject.SetActive(true);
+            }
+        }
+
+
+
+        //butonlar yeteri kadar melzeme olmayýnca yok olur, yeteri malzeme gelince tekrardan dirilir
+        
         if (resourceAmount.stoneNum < 80)
         {
             houseButtonB.gameObject.SetActive(true);
@@ -185,26 +243,8 @@ public class BuildingManager : MonoBehaviour
             mineButtonB.gameObject.SetActive(false);
             mineButton.gameObject.SetActive(true);
         }
-        if (resourceAmount.stoneNum < 120)
-        {
-            barrackButtonB.gameObject.SetActive(true);
-            barrackButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            barrackButtonB.gameObject.SetActive(false);
-            barrackButton.gameObject.SetActive(true);
-        }
-        if (resourceAmount.stoneNum < 160)
-        {
-            axeManButtonB.gameObject.SetActive(true);
-            axeManButton.gameObject.SetActive(false);
-        }
-        else
-        {
-            axeManButtonB.gameObject.SetActive(false);
-            axeManButton.gameObject.SetActive(true);
-        }
+
+
         if (resourceAmount.stoneNum < 200)
         {
             arrowTowerButtonB.gameObject.SetActive(true);
@@ -215,6 +255,8 @@ public class BuildingManager : MonoBehaviour
             arrowTowerButtonB.gameObject.SetActive(false);
             arrowTowerButton.gameObject.SetActive(true);
         }
+
+
 
 
 
@@ -255,11 +297,12 @@ public class BuildingManager : MonoBehaviour
     {if(index == 0)
         {
             pendingObject = Instantiate(mainBase, posit, transform.rotation);
-    
+            baseCount++;
         }
        else if (index == 1)
         {
             pendingObject = Instantiate(house, posit, transform.rotation);
+            
         }
         else if (index == 2)
         {
@@ -268,10 +311,12 @@ public class BuildingManager : MonoBehaviour
         else if (index == 3)
         {
             pendingObject = Instantiate(barrack, posit, transform.rotation);
+            barrackCount++;
         }
         else if (index == 4)
         {
             pendingObject = Instantiate(axeMan, posit, transform.rotation);
+            axeManCount++;
         }
         else if (index == 5)
         {
