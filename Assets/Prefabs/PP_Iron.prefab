@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 4004151140662239492}
   - component: {fileID: 4004151140663206852}
   - component: {fileID: -8058521868088714014}
+  - component: {fileID: -5548764233769754051}
   m_Layer: 0
-  m_Name: PP_Stone_Iron
+  m_Name: PP_Iron
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,6 +99,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.63904566, y: 0.5529156, z: 0.63298225}
   m_Center: {x: 0.0131035745, y: -0.052386284, z: -0.022549555}
+--- !u!114 &-5548764233769754051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4004151140661214468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ceb681f93c928d499c799c2c21728ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  iron: 0
 --- !u!1001 &7727160548706360485
 PrefabInstance:
   m_ObjectHideFlags: 0

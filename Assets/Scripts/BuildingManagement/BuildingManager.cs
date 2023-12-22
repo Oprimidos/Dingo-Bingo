@@ -56,9 +56,12 @@ public class BuildingManager : MonoBehaviour
 
 
     private int baseCount = 0;
-    private int barrackCount = 0;
-    private int axeManCount = 0;
+    public int barrackCount = 0;
+    public int axeManCount = 0;
 
+    //barrack ve axeman binalarý kordinatlarýný
+    public Vector3 barrackLocation;
+    public Vector3 axeManLocation;
     public void Start()
     {
         resourceAmount = GameObject.Find("ResourceManager").GetComponent<ResourceAmount>();
@@ -312,11 +315,13 @@ public class BuildingManager : MonoBehaviour
         {
             pendingObject = Instantiate(barrack, posit, transform.rotation);
             barrackCount++;
+            barrackLocation = posit ; //inþaa edildiði lokasyon
         }
         else if (index == 4)
         {
             pendingObject = Instantiate(axeMan, posit, transform.rotation);
             axeManCount++;
+            axeManLocation = posit;  //inþaa edildiði lokasyon
         }
         else if (index == 5)
         {

@@ -16,9 +16,10 @@ GameObject:
   - component: {fileID: 8005801598191882646}
   - component: {fileID: 8005801598191882648}
   - component: {fileID: 4769044373424563435}
+  - component: {fileID: 6759226260058909754}
   m_Layer: 8
   m_Name: SwordMan
-  m_TagString: Untagged
+  m_TagString: BlueArmy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -173,6 +174,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6759226260058909754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8005801598191882641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdfc9d3d10d96e64ab0906a79996c59d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  damage: 10
+  goldSpent: 5
 --- !u!1 &8005801598691073640
 GameObject:
   m_ObjectHideFlags: 0

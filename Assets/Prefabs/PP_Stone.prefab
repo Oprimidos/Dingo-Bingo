@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1807542099574858791}
   - component: {fileID: 1807542099573761767}
   - component: {fileID: 726741821335837801}
+  - component: {fileID: -8061254132946394003}
   m_Layer: 0
-  m_Name: PP_Stone_Stone
+  m_Name: PP_Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,6 +99,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.63904566, y: 0.5529156, z: 0.63298225}
   m_Center: {x: 0.0131035745, y: -0.052386284, z: -0.022549555}
+--- !u!114 &-8061254132946394003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1807542099571832871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d83083eef99286418c752762d348e3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stone: 0
 --- !u!1001 &5023858142934653318
 PrefabInstance:
   m_ObjectHideFlags: 0

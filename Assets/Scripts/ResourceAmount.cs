@@ -11,8 +11,8 @@ public class ResourceAmount : MonoBehaviour
     public TextMeshProUGUI goldAmount;
 
     public  int stoneNum = 200;
-    public static int ironNum = 0;
-    public static int goldNum = 0;
+    public  int ironNum = 0;
+    public  int goldNum = 0;
     // Start is called before the first frame update
     void Start()
     {
