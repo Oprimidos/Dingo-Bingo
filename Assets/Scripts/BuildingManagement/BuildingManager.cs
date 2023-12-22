@@ -58,6 +58,7 @@ public class BuildingManager : MonoBehaviour
     private int baseCount = 0;
     public int barrackCount = 0;
     public int axeManCount = 0;
+    public int mineCount;
 
     //barrack ve axeman binalarý kordinatlarýný
     public Vector3 barrackLocation;
@@ -236,7 +237,7 @@ public class BuildingManager : MonoBehaviour
             houseButtonB.gameObject.SetActive(false);
             houseButton.gameObject.SetActive(true);
         }
-        if (resourceAmount.stoneNum < 40)
+        if (resourceAmount.stoneNum < 60)
         {
             mineButtonB.gameObject.SetActive(true);
             mineButton.gameObject.SetActive(false);
@@ -310,6 +311,7 @@ public class BuildingManager : MonoBehaviour
         else if (index == 2)
         {
             pendingObject = Instantiate(mine, posit, transform.rotation);
+            mineCount++;
         }
         else if (index == 3)
         {

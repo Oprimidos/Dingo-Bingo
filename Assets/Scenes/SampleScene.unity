@@ -1061,6 +1061,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 205081120}
     m_Modifications:
+    - target: {fileID: 1007020014065358188, guid: 46f136872ae44ee4197c64fc4a30adf6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4224288773837663725, guid: 46f136872ae44ee4197c64fc4a30adf6, type: 3}
       propertyPath: m_Name
       value: PP_Gold (8)
@@ -2616,6 +2620,7 @@ MonoBehaviour:
   gridToggle: {fileID: 1027848544}
   barrackCount: 0
   axeManCount: 0
+  mineCount: 0
   barrackLocation: {x: 0, y: 0, z: 0}
   axeManLocation: {x: 0, y: 0, z: 0}
 --- !u!4 &410346822
