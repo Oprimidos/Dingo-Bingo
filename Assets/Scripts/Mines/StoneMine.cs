@@ -6,9 +6,11 @@ public class StoneMine : MonoBehaviour
 {
     public int stone;
     ResourceAmount resourceAmount;
+    public GameManagement gameManagement;
     void Start()
     {
         stone = Random.Range(200, 501);
+        gameManagement = GameObject.Find("GameManagement").GetComponent<GameManagement>();
         resourceAmount = GameObject.Find("ResourceManager").GetComponent<ResourceAmount>();
         
     }
@@ -20,19 +22,43 @@ public class StoneMine : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("BuildingMine"))
+        if(gameManagement.playerNum == 1)
         {
-            DecreaseResourceAndIncreaseAmount();
-            InvokeRepeating("DecreaseResourceAndIncreaseAmount", 0f, 60f);
+            if (other.CompareTag("BuildingMine"))
+            {
+                DecreaseResourceAndIncreaseAmount();
+                InvokeRepeating("DecreaseResourceAndIncreaseAmount", 0f, 60f);
+            }
         }
+        if(gameManagement.playerNum == 2)
+        {
+            if (other.CompareTag("BuildingMineRed"))
+            {
+                DecreaseResourceAndIncreaseAmount();
+                InvokeRepeating("DecreaseResourceAndIncreaseAmount", 0f, 60f);
+            }
+        }
+        
     }
 
     void DecreaseResourceAndIncreaseAmount()//elimizde yeterli miktarda maden varsa onu madenden azaltýp kaynaða eklesin
     {
-        if (stone >= 0)
+        if(gameManagement.playerNum == 1)
         {
-            stone -= 10;
-            resourceAmount.stoneNum += 10;
+            if (stone >= 0)
+            {
+                stone -= 10;
+                resourceAmount.stoneNum += 10;
+            }
         }
+        if(gameManagement.playerNum == 2)
+        {
+            if (stone >= 0)
+            {
+                stone -= 10;
+                resourceAmount.stoneNumR += 10;
+            }
+        }
+        
     }
 }

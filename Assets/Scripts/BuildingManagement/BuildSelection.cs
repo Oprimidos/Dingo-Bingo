@@ -10,6 +10,7 @@ public class BuildSelection : MonoBehaviour
     public TextMeshProUGUI objNameText;
     public TextMeshProUGUI healthText; // Reference to UI Text component for displaying health
     private BuildingManager buildingManager;
+    public GameManagement gameManagement;
 
     public GameObject objUI;
 
@@ -23,6 +24,7 @@ public class BuildSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameManagement = GameObject.Find("GameManagement").GetComponent<GameManagement>();
         buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
     }
 
@@ -33,13 +35,27 @@ public class BuildSelection : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 1000))
+            if (gameManagement.playerNum == 1)
             {
-                if (hit.collider.gameObject.CompareTag("Building"))
+                if (Physics.Raycast(ray, out hit, 1000))
                 {
-                    Select(hit.collider.gameObject);
+                    if (hit.collider.gameObject.CompareTag("Building") || hit.collider.gameObject.CompareTag("Tower") || hit.collider.gameObject.CompareTag("BuildingMine"))
+                    {
+                        Select(hit.collider.gameObject);
+                    }
                 }
             }
+            if(gameManagement.playerNum == 2)
+            {
+                if (Physics.Raycast(ray, out hit, 1000))
+                {
+                    if (hit.collider.gameObject.CompareTag("BuildingRed") || hit.collider.gameObject.CompareTag("RedTower") || hit.collider.gameObject.CompareTag("BuildingMineRed"))
+                    {
+                        Select(hit.collider.gameObject);
+                    }
+                }
+            }
+            
         }
         if (Input.GetMouseButtonDown(1) && selectedObject != null)
         {

@@ -13,6 +13,15 @@ public class BuildingManager : MonoBehaviour
       public GameObject axeMan;
       public GameObject arrowTower;
     public GameObject pendingObject;
+
+    public GameObject mainBaseR;
+    public GameObject houseR;
+    public GameObject mineR;
+    public GameObject barrackR;
+    public GameObject axeManR;
+    public GameObject arrowTowerR;
+    
+
     [SerializeField] private Material[] materials;
 
     int stoneCost = 60;
@@ -38,6 +47,7 @@ public class BuildingManager : MonoBehaviour
     public Button axeManButtonB;
     public Button arrowTowerButtonB;
 
+    public GameManagement gameManagement;
     ResourceAmount resourceAmount;//Ana kaynak koda ulaþmak için
 
     public float rotateAmount = 45f;
@@ -60,13 +70,22 @@ public class BuildingManager : MonoBehaviour
     public int axeManCount = 0;
     public int mineCount;
 
+    private int baseCountR = 0;
+    public int barrackCountR = 0;
+    public int axeManCountR = 0;
+    public int mineCountR;
+    
     //barrack ve axeman binalarý kordinatlarýný
     public Vector3 barrackLocation;
     public Vector3 axeManLocation;
+
+    public Vector3 barrackLocationR;
+    public Vector3 axeManLocationR;
     public void Start()
     {
         resourceAmount = GameObject.Find("ResourceManager").GetComponent<ResourceAmount>();
-         objects[0] = mainBase;
+        gameManagement = GameObject.Find("GameManagement").GetComponent<GameManagement>();
+        objects[0] = mainBase;
          objects[1] = house;
          objects[2] = mine;
          objects[3] = barrack;
@@ -87,14 +106,9 @@ public class BuildingManager : MonoBehaviour
         if (pendingObject != null)
         {
            
-            if (gridOn)
-            {
-                pendingObject.transform.position = new Vector3(RoadToNearestGrid(posit.x), RoadToNearestGrid(posit.y), RoadToNearestGrid(posit.z));
-            }
-            else
-            {
-                pendingObject.transform.position = posit;
-            }
+           
+            pendingObject.transform.position = posit;
+            
 
 
             if (Input.GetMouseButtonDown(0) && canPlace)
@@ -107,7 +121,7 @@ public class BuildingManager : MonoBehaviour
             {
                 RotateObject();
             }
-            uptadeMaterials();
+            
         }
     }
 
@@ -144,7 +158,11 @@ public class BuildingManager : MonoBehaviour
                 stoneCost = arrowCost;
             }
 
-            // Check if there are enough stones to build
+
+            //player num kontrol
+            if(gameManagement.playerNum == 1)
+            {
+ // Check if there are enough stones to build
             if (resourceAmount.stoneNum >= stoneCost)
             {
                 // Reduce the stone amount
@@ -159,13 +177,33 @@ public class BuildingManager : MonoBehaviour
                 // Handle insufficient resources (optional)
                 Debug.Log("Insufficient stones to build!");
             }
+            }else if (gameManagement.playerNum == 2)
+            {
+                // Check if there are enough stones to build
+                if (resourceAmount.stoneNumR >= stoneCost)
+                {
+                    // Reduce the stone amount
+                    resourceAmount.stoneNumR -= stoneCost;
+
+                    // Set the material and reset pendingObject
+                    pendingObject.GetComponent<MeshRenderer>().material = materials[2];
+                    pendingObject = null;
+                }
+                else
+                {
+                    // Handle insufficient resources (optional)
+                    Debug.Log("Insufficient stones to build!");
+                }
+            }
+           
         }
     }
 
 
     public void BuildingButtonManagement() 
     {
-        // base, barrack ve axeman binalarý bir kurulmuþ ise bir daha inþaa edilmesine izin vermemek için binanýn inþa butonunu deactive ediyoruz
+        if(gameManagement.playerNum == 1)
+        {// base, barrack ve axeman binalarý bir kurulmuþ ise bir daha inþaa edilmesine izin vermemek için binanýn inþa butonunu deactive ediyoruz
         if (baseCount > 0)
         {
             baseButtonB.gameObject.SetActive(true);
@@ -223,8 +261,6 @@ public class BuildingManager : MonoBehaviour
             }
         }
 
-
-
         //butonlar yeteri kadar melzeme olmayýnca yok olur, yeteri malzeme gelince tekrardan dirilir
         
         if (resourceAmount.stoneNum < 80)
@@ -260,6 +296,104 @@ public class BuildingManager : MonoBehaviour
             arrowTowerButton.gameObject.SetActive(true);
         }
 
+        }else if (gameManagement.playerNum ==2)
+        {
+
+            if (baseCountR > 0)
+            {
+                baseButtonB.gameObject.SetActive(true);
+                baseButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                if (resourceAmount.stoneNumR < 60)
+                {
+                    baseButtonB.gameObject.SetActive(true);
+                    baseButton.gameObject.SetActive(false);
+                }
+                else
+                {
+                    baseButtonB.gameObject.SetActive(false);
+                    baseButton.gameObject.SetActive(true);
+                }
+            }
+
+            if (barrackCountR > 0)
+            {
+                barrackButtonB.gameObject.SetActive(true);
+                barrackButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                if (resourceAmount.stoneNumR < 120)
+                {
+                    barrackButtonB.gameObject.SetActive(true);
+                    barrackButton.gameObject.SetActive(false);
+                }
+                else
+                {
+                    barrackButtonB.gameObject.SetActive(false);
+                    barrackButton.gameObject.SetActive(true);
+                }
+            }
+
+            if (axeManCountR > 0)
+            {
+                axeManButtonB.gameObject.SetActive(true);
+                axeManButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                if (resourceAmount.stoneNumR < 160)
+                {
+                    axeManButtonB.gameObject.SetActive(true);
+                    axeManButton.gameObject.SetActive(false);
+                }
+                else
+                {
+                    axeManButtonB.gameObject.SetActive(false);
+                    axeManButton.gameObject.SetActive(true);
+                }
+            }
+
+            //butonlar yeteri kadar melzeme olmayýnca yok olur, yeteri malzeme gelince tekrardan dirilir
+
+            if (resourceAmount.stoneNumR < 80)
+            {
+                houseButtonB.gameObject.SetActive(true);
+                houseButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                houseButtonB.gameObject.SetActive(false);
+                houseButton.gameObject.SetActive(true);
+            }
+            if (resourceAmount.stoneNumR < 60)
+            {
+                mineButtonB.gameObject.SetActive(true);
+                mineButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                mineButtonB.gameObject.SetActive(false);
+                mineButton.gameObject.SetActive(true);
+            }
+
+
+            if (resourceAmount.stoneNumR < 200)
+            {
+                arrowTowerButtonB.gameObject.SetActive(true);
+                arrowTowerButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                arrowTowerButtonB.gameObject.SetActive(false);
+                arrowTowerButton.gameObject.SetActive(true);
+            }
+
+        }
+        
+
 
 
 
@@ -282,23 +416,13 @@ public class BuildingManager : MonoBehaviour
         }
     }
 
-    public void uptadeMaterials()
-    {
-        if (pendingObject != null)
-        {
-            if (canPlace)
-            {
-                pendingObject.GetComponent<MeshRenderer>().material = materials[0];
-            }
-            else
-            {
-                pendingObject.GetComponent<MeshRenderer>().material = materials[1];
-            }
-        }
-    }
+
 
     public void SelectObject(int index)//seçilen butona göre binanýn inþaa edilmesi
-    {if(index == 0)
+    {
+       if(gameManagement.playerNum == 1)
+        {
+       if(index == 0)
         {
             pendingObject = Instantiate(mainBase, posit, transform.rotation);
             baseCount++;
@@ -329,10 +453,45 @@ public class BuildingManager : MonoBehaviour
         {
             pendingObject = Instantiate(arrowTower, posit, transform.rotation);
         }
+        } else if(gameManagement.playerNum == 2)
+        {
+            if (index == 0)
+            {
+                pendingObject = Instantiate(mainBaseR, posit, transform.rotation);
+                baseCountR++;
+            }
+            else if (index == 1)
+            {
+                pendingObject = Instantiate(houseR, posit, transform.rotation);
+
+            }
+            else if (index == 2)
+            {
+                pendingObject = Instantiate(mineR, posit, transform.rotation);
+                mineCountR++;
+            }
+            else if (index == 3)
+            {
+                pendingObject = Instantiate(barrackR, posit, transform.rotation);
+                barrackCountR++;
+                barrackLocationR = posit; //inþaa edildiði lokasyon
+            }
+            else if (index == 4)
+            {
+                pendingObject = Instantiate(axeManR, posit, transform.rotation);
+                axeManCountR++;
+                axeManLocationR = posit;  //inþaa edildiði lokasyon
+            }
+            else if (index == 5)
+            {
+                pendingObject = Instantiate(arrowTowerR, posit, transform.rotation);
+            }
+        }
+       
 
     }
 
-    public void ToggleGrid()
+    /*public void ToggleGrid()
     {
         if (gridToggle.isOn)
         {
@@ -351,5 +510,5 @@ public class BuildingManager : MonoBehaviour
             pos += gridSize;
         }
         return pos;
-    }
+    }*/
 }

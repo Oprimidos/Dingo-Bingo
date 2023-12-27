@@ -6,12 +6,13 @@ public class IronMine : MonoBehaviour
 {
     public int iron;
     ResourceAmount resourceAmount;
-    private BuildingManager buildingManager;
+    public GameManagement gameManagement;
+    
     void Start()
     {
         iron = Random.Range(200, 501);
+        gameManagement = GameObject.Find("GameManagement").GetComponent<GameManagement>();
         resourceAmount = GameObject.Find("ResourceManager").GetComponent<ResourceAmount>();
-        buildingManager = GameObject.Find("BuildingManager").GetComponent<BuildingManager>();
         
     }
 
@@ -23,19 +24,42 @@ public class IronMine : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("BuildingMine"))
+        if(gameManagement.playerNum == 1)
         {
-            DecreaseResourceAndIncreaseAmount();
-            InvokeRepeating("DecreaseResourceAndIncreaseAmount", 0f, 60f);
+            if (other.CompareTag("BuildingMine"))
+            {
+                DecreaseResourceAndIncreaseAmount();
+                InvokeRepeating("DecreaseResourceAndIncreaseAmount", 0f, 60f);
+            }
         }
+        if(gameManagement.playerNum == 2)
+        {
+            if (other.CompareTag("BuildingMineRed"))
+            {
+                DecreaseResourceAndIncreaseAmount();
+                InvokeRepeating("DecreaseResourceAndIncreaseAmount", 0f, 60f);
+            }
+        }
+        
     }
 
     void DecreaseResourceAndIncreaseAmount()//elimizde yeterli miktarda maden varsa onu madenden azaltýp kaynaða eklesin
     {
-        if (iron >= 0)
+        if(gameManagement.playerNum == 1)
         {
-            iron -= 10 ;
-            resourceAmount.ironNum += 10;
+            if (iron >= 0)
+            {
+                iron -= 10;
+                resourceAmount.ironNum += 10;
+            }
+        }
+        if(gameManagement.playerNum == 2)
+        {
+            if (iron >= 0)
+            {
+                iron -= 10;
+                resourceAmount.ironNumR += 10;
+            }
         }
     }
 }

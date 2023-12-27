@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class CameraMovementScript : MonoBehaviour
 {
@@ -19,44 +20,51 @@ public class CameraMovementScript : MonoBehaviour
 
     Vector3 rotateStartPosition;
     Vector3 rotateCurrentPosition;
+
+    PhotonView view;
     void Start()
     {
       newPosition = transform.position;
         newRotation = transform.rotation;
         newZoom = cameraTransform.localPosition;
+        view = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleMouseInput();
-        HandleMovementInput();
+        
+            HandleMouseInput();
+            HandleMovementInput();
+       
 
     }
 
     void HandleMouseInput()
     {
+        
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                newZoom += Input.mouseScrollDelta.y * zoomAmount;
+            }
+
+            //fare ile rotate yapma
+            if (Input.GetMouseButtonDown(2))
+            {
+                rotateStartPosition = Input.mousePosition;
+            }
+            if (Input.GetMouseButton(2))
+            {
+                rotateCurrentPosition = Input.mousePosition;
+
+                Vector3 difference = rotateStartPosition - rotateCurrentPosition;
+
+                rotateStartPosition = rotateCurrentPosition;
+
+                newRotation *= Quaternion.Euler(Vector3.up * (-difference.x / 5));
+            }
         // fare ile zoom yapma
-        if(Input.mouseScrollDelta.y != 0)
-        {
-            newZoom += Input.mouseScrollDelta.y * zoomAmount;
-        }
-
-        //fare ile rotate yapma
-        if (Input.GetMouseButtonDown(2))
-        {
-            rotateStartPosition = Input.mousePosition;
-        }
-        if (Input.GetMouseButton(2))
-        {
-            rotateCurrentPosition = Input.mousePosition;
-
-            Vector3 difference = rotateStartPosition - rotateCurrentPosition;
-
-            rotateStartPosition = rotateCurrentPosition;
-
-            newRotation *= Quaternion.Euler(Vector3.up * (-difference.x / 5));
-        }
+        
     }
     void HandleMovementInput()
     {
